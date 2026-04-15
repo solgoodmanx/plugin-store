@@ -14,6 +14,8 @@ BPB, short for Based Pings Bot, is an automated Solana memecoin signal product f
 
 BPB Lite packages the public-facing intelligence layer of that system into a reusable OKX Build X Skill Arena workflow. It helps agents and operators understand why a token deserves attention by combining volume behavior, market structure, launch-source attribution, Streamflow lock context, and wallet-aware signal framing in one compact read.
 
+It should not be framed as a basic DexScreener wrapper. The broader BPB system is OKX-first, with DexScreener used selectively, Helius Pro used for Solana-native verification, Solscan used for operator follow-up, and platform-native APIs used when direct attribution improves the read.
+
 ## Problem
 
 Solana memecoin decision-making is fragmented across launchpads, venues, explorers, wallets, and social search. That fragmentation makes early signal recognition noisy, delayed, and inconsistent.
@@ -25,7 +27,7 @@ BPB Lite gives AI agents a structured signal engine that can:
 - read **volume injections** and movement across meaningful windows
 - classify **EARLY**, **MOMENTUM**, and **CONFIRMATION** style setups
 - incorporate token-quality context like liquidity, holder structure, and Streamflow locks
-- interpret smart-money context from a large tracked-wallet layer
+- interpret smart-money and holder context through stronger Solana-native verification layers
 - separate **launch source** from **downstream trading venue** when both matter
 - return a compact evidence-backed signal read with operator-ready follow-up links
 
@@ -35,9 +37,10 @@ BPB Lite is designed to expose real public capabilities of the BPB system withou
 
 Publicly, it can credibly describe these capabilities:
 
-- **1,000+ tracked wallets** for smart-money context
+- **OKX OnchainOS-first** signal intelligence for market structure and momentum framing
+- **Helius Pro** support for Solana-native verification and wallet-aware context
 - **Streamflow lock** reading as part of token-quality interpretation
-- platform-aware coverage across **Pumpfun, Bonk, LaunchLab, Printr, Meteora, DBC, Raydium, and RISE**
+- platform-aware coverage across **Pumpfun, Bonk, Bags, LaunchLab, Printr, Meteora, DBC, Raydium, and RISE**
 - launch-source versus liquidity-venue separation, including cases like **Printr -> Meteora**
 - filtered subscriber alert concepts based on setup style, structure quality, and platform context
 
@@ -93,9 +96,11 @@ The five screenshots together tell a simple story:
 
 ## Why OKX matters in this submission
 
-BPB Lite should be framed as OKX-powered signal intelligence, not just a generic scanner.
+BPB Lite should be framed as OKX-powered signal intelligence, not just a generic scanner or a thin DexScreener bot.
 
-OKX OnchainOS is the main public intelligence layer behind the workflow. It helps BPB interpret market structure, venue context, token state, and momentum conditions in a way that is useful for real operator decisions.
+OKX OnchainOS is the main public intelligence layer behind the workflow. It helps BPB interpret market structure, venue context, token state, holder concentration, and momentum conditions in a way that is useful for real operator decisions.
+
+DexScreener is a selective support lane for pair visibility and venue context. Helius Pro supports Solana-native verification and wallet context. Solscan is for operator inspection. Platform-native APIs like Printr and RISE matter when direct attribution is available.
 
 ## Suggested tags
 

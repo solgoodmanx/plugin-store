@@ -1,7 +1,7 @@
 schema_version: 1
 name: bpb-lite
 version: "0.1.0"
-description: "Public AI-agent workflow for Based Pings Bot, focused on Solana automated signals, volume insights, launchpad context, and compact research output"
+description: "Public AI-agent workflow for Based Pings Bot, focused on OKX-first Solana signal intelligence, launchpad context, and compact operator-ready research output"
 author:
   name: "solgoodman"
   github: "solgoodmanx"
@@ -22,6 +22,5 @@ components:
 api_calls:
   - "web3.okx.com"
   - "api.dexscreener.com"
-  - "public-api.birdeye.so"
   - "api-preview.printr.money"
   - "api.helius.xyz"

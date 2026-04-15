@@ -1,8 +1,10 @@
 # BPB Lite
 
-**Early Solana signal intelligence. Powered by OKX OnchainOS.**
+**Early Solana signal intelligence. OKX-first, not a DexScreener wrapper.**
 
-BPB (Based Pings Bot) catches tradable memecoin momentum before it becomes obvious. It reads volume injections, momentum shape, liquidity structure, smart-wallet behavior, Streamflow locks, and launch-source context — then tells you whether a setup is worth acting on and why.
+BPB (Based Pings Bot) catches tradable memecoin momentum before it becomes obvious. It reads volume injections, momentum shape, liquidity structure, smart-wallet behavior, Streamflow locks, and launch-source context, then tells you whether a setup is worth acting on and why.
+
+The key point is simple: BPB is not just a bot that follows DexScreener data. The broader production system is built around OKX OnchainOS as the main intelligence layer, with DexScreener used selectively for pair visibility and venue follow-up, Helius Pro used for Solana-native verification and holder intelligence, Solscan used for operator follow-up, and platform-native APIs used when direct launch attribution is available.
 
 BPB Lite is the public skill version: a working signal workflow for AI agents, built for the OKX Build X Skill Arena.
 
@@ -18,7 +20,7 @@ One scan. One verdict. Operator-ready output.
 
 If you only read one section, read this.
 
-- **What it is:** an OKX-powered AI-agent workflow for Based Pings Bot, focused on early Solana signal detection
+- **What it is:** an OKX-first AI-agent workflow for Based Pings Bot, focused on early Solana signal detection
 - **What it does:** turns raw token movement into an operator-ready read with signal tier, structure context, attribution, and follow-up links
 - **What proves it:** the screenshots below show live pings, milestone follow-through, leaderboard analytics, and token-level performance review
 - **Why it matters:** BPB is built to surface tradable momentum early, not just describe tokens after the fact
@@ -68,8 +70,10 @@ Publicly, BPB can honestly say it is built to:
 - detect **volume injections** across meaningful time windows
 - identify **early runner behavior** and continuation structure
 - interpret **momentum quality**, not just raw movement
-- read **liquidity, holder concentration, and token structure** before surfacing a setup
-- use more than **1,000 tracked wallets** for smart-money context
+- read **market structure, liquidity, holder concentration, and token context** before surfacing a setup
+- use **OKX OnchainOS** as the main intelligence layer in the broader production workflow
+- use **Helius Pro** for Solana-native verification and wallet-intelligence support
+- use **DexScreener** selectively for venue visibility and follow-up, not as the whole engine
 - read **Streamflow lock** state as part of token-quality analysis
 - separate **launch source** from **downstream liquidity venue** when that distinction changes the read
 - support **subscriber-facing filtered alerts** by setup quality, platform context, and signal style
@@ -82,7 +86,7 @@ BPB Lite gives agents and judges a strong public slice of that system:
 - signal-oriented market snapshotting
 - volume and momentum framing across meaningful windows
 - platform and launch-source attribution
-- support for launchpads and venues including **Pumpfun, Bonk, LaunchLab, Printr, Meteora, DBC, Raydium, and RISE** when evidence is available
+- support for launchpads and venues including **Pumpfun, Bonk, Bags, LaunchLab, Printr, Meteora, DBC, Raydium, and RISE** when evidence is available
 - confidence framing for attribution and structure
 - research and operator follow-up links
 
@@ -136,7 +140,7 @@ BPB separates:
 - where the token **launched**
 - where the token is **currently trading**
 
-That is why findings like **Printr vs Meteora** matter, and why **RISE** should be treated as platform context rather than some fake generic bucket.
+That is why findings like **Pumpfun**, **Bonk**, **Bags**, **Printr vs Meteora**, and **RISE** matter, and why **RISE** should be treated as platform context rather than some fake generic bucket.
 
 ### 5. Alerts should be filterable, not noisy
 The full BPB product supports filtered alerts for subscribers. Publicly, that means BPB can describe itself as supporting things like:
@@ -229,6 +233,8 @@ BPB uses OKX-aligned token and market intelligence to understand things like:
 
 That matters because BPB is not trying to be a generic token encyclopedia. It is trying to help an operator or agent decide whether a setup deserves attention now.
 
+DexScreener is still useful, but in the correct lane: pair visibility, venue context, quick follow-up links, and public cross-checks. Helius Pro strengthens Solana-native verification and wallet-aware reads. Solscan supports inspection. Platform-native APIs such as Printr and RISE improve direct attribution when available.
+
 ## Subscriber filters and delivery control
 
 BPB is not a one-size-fits-all alert feed.
@@ -236,7 +242,7 @@ BPB is not a one-size-fits-all alert feed.
 Subscribers can tune delivery at the chat level while the base engine and house rules continue running underneath. In public terms, that means BPB supports per-chat overrides across:
 
 - **alert tiers** like TURBO, EARLY, REVIVAL, MOMENTUM, CONFIRMATION, and WATCH
-- **platform toggles** across venues and launch contexts like Pumpfun, LaunchLab, Printr, Meteora, Raydium, Moonshot, Bonk, Jupiter, and RISE
+- **platform toggles** across venues and launch contexts like Pumpfun, LaunchLab, Printr, Meteora, Raydium, Moonshot, Bonk, Bags, Jupiter, and RISE
 - **market filters** such as holders, volume, and age bands
 - **holder-structure filters** such as dev share, snipers, bundlers, top10 concentration, and smart holders
 - **social filters** such as linked tweet, website, and Telegram presence
@@ -271,11 +277,11 @@ BPB Lite is positioned around **OKX OnchainOS** as the primary public intelligen
 
 Supporting sources include:
 
-- DexScreener for pair visibility and market context
-- Helius for wallet and Solana-native verification
+- DexScreener for selective pair visibility, venue context, and market cross-checks
+- Helius Pro for wallet and Solana-native verification
 - Solscan for operator follow-up
 - Streamflow for lock context
-- Printr preview API for direct attribution when configured
+- Printr and RISE platform APIs for direct attribution when configured
 
 See `references/data-sources.md` for the trust matrix.
 
