@@ -22,8 +22,18 @@ test('inferPlatform detects Meteora from pair metadata', () => {
   assert.equal(result.confidence, 'Medium');
 });
 
+test('inferPlatform detects Pumpfun from pair metadata', () => {
+  const result = inferPlatform({
+    ca: 'Pump111111111111111111111111111111111111111',
+    printr: null,
+    bestPair: { dexId: 'pumpfun', labels: ['launch'], url: 'https://dexscreener.com/solana/example' },
+  });
+  assert.equal(result.platform, 'Pumpfun');
+  assert.equal(result.confidence, 'Medium');
+});
+
 test('inferSignal returns EARLY for strong structure', () => {
-  const result = inferSignal({ marketCapUsd: 40000, volume1hUsd: 50000, liquidityUsd: 15000, holders: 180 });
+  const result = inferSignal({ marketCapUsd: 40000, volume1hUsd: 50000, liquidityUsd: 15000, holders: 180, top10Pct: 24 });
   assert.equal(result, 'EARLY');
 });
 
@@ -41,4 +51,16 @@ test('inferConfidence falls to Low for sparse unknown structure', () => {
     holders: null,
   });
   assert.equal(result, 'Low');
+});
+
+test('inferConfidence stays Medium for partial but usable structure', () => {
+  const result = inferConfidence({
+    attributionConfidence: 'Medium',
+    marketCapUsd: 120000,
+    volume1hUsd: 25000,
+    liquidityUsd: 9000,
+    holders: 90,
+    top10Pct: 58,
+  });
+  assert.equal(result, 'Medium');
 });
