@@ -1,7 +1,7 @@
 ---
 name: bpb-lite
 description: "Public AI-agent workflow for Based Pings Bot, focused on Solana automated signals, volume insights, platform attribution, and compact research output"
-version: "0.1.0"
+version: "0.1.1"
 author: "solgoodman"
 tags:
   - solana

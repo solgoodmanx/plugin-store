@@ -1,6 +1,6 @@
 schema_version: 1
 name: bpb-lite
-version: "0.1.0"
+version: "0.1.1"
 description: "Public AI-agent workflow for Based Pings Bot, focused on OKX-first Solana signal intelligence, launchpad context, and compact operator-ready research output"
 author:
   name: "solgoodman"
