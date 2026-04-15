@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { inferPlatform, inferSignal, inferConfidence } from '../scripts/scan-token.js';
+import { inferPlatform, inferSignal, inferConfidence, buildScanSnapshot } from '../scripts/scan-token.js';
 
 test('inferPlatform returns Printr on direct attribution', () => {
   const result = inferPlatform({
@@ -30,6 +30,33 @@ test('inferPlatform detects Pumpfun from pair metadata', () => {
   });
   assert.equal(result.platform, 'Pumpfun');
   assert.equal(result.confidence, 'Medium');
+});
+
+test('inferPlatform detects Bonk from pair metadata', () => {
+  const result = inferPlatform({
+    ca: 'Bonk111111111111111111111111111111111111111',
+    printr: null,
+    bestPair: { dexId: 'raydium', labels: ['bonk'], url: 'https://dexscreener.com/solana/example' },
+  });
+  assert.equal(result.platform, 'Bonk');
+});
+
+test('inferPlatform detects Bags from pair metadata', () => {
+  const result = inferPlatform({
+    ca: 'Bags111111111111111111111111111111111111111',
+    printr: null,
+    bestPair: { dexId: 'raydium', labels: ['bags'], url: 'https://dexscreener.com/solana/example' },
+  });
+  assert.equal(result.platform, 'Bags');
+});
+
+test('inferPlatform detects RISE from pair metadata', () => {
+  const result = inferPlatform({
+    ca: 'Rise111111111111111111111111111111111111111',
+    printr: null,
+    bestPair: { dexId: 'raydium', labels: ['rise'], url: 'https://dexscreener.com/solana/example' },
+  });
+  assert.equal(result.platform, 'RISE');
 });
 
 test('inferSignal returns EARLY for strong structure', () => {
@@ -63,4 +90,47 @@ test('inferConfidence stays Medium for partial but usable structure', () => {
     top10Pct: 58,
   });
   assert.equal(result, 'Medium');
+});
+
+test('buildScanSnapshot exposes explicit source adapter list', async () => {
+  const originalFetch = global.fetch;
+  global.fetch = async (url) => {
+    if (String(url).includes('api.dexscreener.com')) {
+      return {
+        ok: true,
+        json: async () => ({
+          pairs: [{
+            dexId: 'pumpfun',
+            labels: ['launch'],
+            url: 'https://dexscreener.com/solana/example',
+            baseToken: { name: 'Test', symbol: 'TEST' },
+            liquidity: { usd: 9000 },
+            volume: { h1: 12000, h24: 40000 },
+            marketCap: 25000,
+            pairCreatedAt: Date.now() - 60_000,
+          }],
+        }),
+      };
+    }
+    throw new Error(`unexpected fetch ${url}`);
+  };
+
+  const oldOkxKey = process.env.OKX_API_KEY;
+  const oldHeliusKey = process.env.HELIUS_API_KEY;
+  const oldPrintrKey = process.env.PRINTR_BEARER_TOKEN;
+  delete process.env.OKX_API_KEY;
+  delete process.env.HELIUS_API_KEY;
+  delete process.env.PRINTR_BEARER_TOKEN;
+
+  try {
+    const snapshot = await buildScanSnapshot('Pump111111111111111111111111111111111111111');
+    assert.equal(snapshot.primarySource, 'DexScreener');
+    assert.deepEqual(snapshot.sourceAdapters, ['okx', 'dexscreener', 'helius', 'printr', 'pumpfun', 'bonk', 'meteora', 'bags', 'rise']);
+    assert.equal(snapshot.platform, 'Pumpfun');
+  } finally {
+    global.fetch = originalFetch;
+    if (oldOkxKey) process.env.OKX_API_KEY = oldOkxKey;
+    if (oldHeliusKey) process.env.HELIUS_API_KEY = oldHeliusKey;
+    if (oldPrintrKey) process.env.PRINTR_BEARER_TOKEN = oldPrintrKey;
+  }
 });
